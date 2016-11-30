@@ -1,0 +1,169 @@
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <button class="btn btn-default" ng-click="fattureNew.saveInvoice()">Save</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <address ng-show="fattureNew.company.name">
+      <strong>{{fattureNew.company.name}}</strong><br>
+      {{fattureNew.company.address}}<br>
+      {{fattureNew.company.cap}}, {{fattureNew.company.city}} {{fattureNew.company.state}}<br>
+      <abbr title="Partita IVA">P. IVA</abbr> {{fattureNew.company.vat_id}}<br>
+      <abbr title="Codice fiscale">Cod. Fisc.</abbr> {{fattureNew.company.tax_code}}
+    </address>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <hr>
+  </div>
+  <div class="col-xs-6">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th width="30%">Tipo</th>
+          <th>Numero</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Fattura
+          </td>
+          <td>
+            <input type="number" min="{{fattureNew.invoices.length + 1}}" class="form-control" ng-model="fattureNew.invoiceInfo.invoice_id">
+          </td>
+          <td>
+            <input type="date" class="form-control" ng-model="fattureNew.invoiceInfo.date">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-6">
+    <p><strong>Cliente</strong></p>
+    <select name="customerSelect" id="customerSelect" class="form-control"
+  ng-options="option.name for option in fattureNew.customers track by option.id"
+  ng-model="fattureNew.customer"></select>
+
+    <address ng-show="fattureNew.customer.name">
+      {{fattureNew.customer.address}}<br>
+      {{fattureNew.customer.cap}}, {{fattureNew.customer.city}} {{fattureNew.customer.state}}<br>
+      <abbr title="Partita IVA">P. IVA</abbr> {{fattureNew.customer.vat_id}}<br>
+      <abbr title="Codice fiscale">Cod. Fisc.</abbr> {{fattureNew.customer.tax_code}}
+    </address>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <hr style="border-top: 4px solid #e6e6e6;">
+  </div>
+  <div class="col-xs-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="3%"></th>
+          <th width="60%">Descrizione</th>
+          <th width="10%">Qtà.</th>
+          <th width="12%" class="text-right">Importo</th>
+          <th width="15%" class="text-right">Totale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in fattureNew.items track by item.id">
+          <td>
+            <i class="glyphicon glyphicon-remove" ng-click="fattureNew.removeItem(item)"></i>
+          </td>
+          <td>
+            <textarea class="form-control" type="text" ng-model="item.description" rows="2"></textarea>
+          </td>
+          <td>
+            <input class="form-control" type="number" min="0" max="10" step="1" ng-model="item.qty">
+          </td>
+          <td class="text-right">
+            <input class="form-control text-right" type="number" min="0" ng-model="item.cost">
+          </td>
+          <td class="text-right">
+            {{item.cost * item.qty | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <i class="glyphicon glyphicon-plus" ng-click="fattureNew.addItem()"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <hr style="border-top: 4px solid #e6e6e6;">
+  </div>
+  <div class="col-xs-12">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td width="75%" class="text-right">
+            Imponibile prestazioni
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureNew.imponibile() | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            Rivalsa parziale INPS 4%
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureNew.rivalsa() | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            TOTALE IMPONIBILE
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureNew.totaleImponibile() | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            IVA 22%
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureNew.iva() | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            TOTALE FATTURA
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureNew.totaleFattura() | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            RITENUTA ACCONTO 20%
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureNew.ritenutaAcconto() | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            <strong>NETTO DA VERSARE</strong>
+          </td>
+          <td width="15%" class="text-right">
+            <strong>{{fattureNew.nettoDaVersare() | currency}}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div uib-alert ng-repeat="alert in fatture.alerts" ng-class="'alert-' + (alert.type || 'success')" close="fatture.closeAlert($index)">{{alert.msg}}</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="3%"></th>
+          <th>
+            Data
+          </th>
+          <th>
+            N. Fattura
+          </th>
+          <th>
+            Cliente
+          </th>
+          <th>
+            IVA
+          </th>
+          <th>
+            Netto da versare
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="fattura in fatture.invoices track by fattura.id">
+          <td>
+            <i class="glyphicon glyphicon-remove" ng-click="fatture.deleteInvoice(fattura.id)"></i>
+          </td>
+          <td>
+            {{fattura.date | date}}
+          </td>
+          <td>
+            <a ng-href="#/fatture/view/{{fattura.invoice_id}}">{{fattura.invoice_id}}</a>
+          </td>
+          <td>
+            {{fattura.customer.name}}
+          </td>
+          <td>
+            {{fattura.iva | currency}}
+          </td>
+          <td>
+            {{fattura.netto_da_versare | currency}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

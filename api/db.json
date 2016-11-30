@@ -1,0 +1,23 @@
+{
+  "invoices": [],
+  "customers": [],
+  "company": {
+    "id": 0,
+    "name": "Your Co.",
+    "address": "Address",
+    "cap": "ZIP",
+    "city": "City",
+    "state": "State",
+    "vat_id": "VAT_ID_NUMBER",
+    "tax_code": "TAX_CODE_NUMBER"
+  },
+  "options": {
+    "tax": 0,
+    "inps": 0,
+    "ritenuta": 0,
+    "banca": {
+      "nome": "Your Bank",
+      "iban": "YOUR_IBAN"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <button class="btn btn-default" ng-click="customerVm.editCustomer()">Edit</button>
+    <button class="btn btn-default" ng-click="customerVm.deleteCustomer()">Delete</button>
+  </div>
+</div>
+<div class="row" ng-hide="customerVm.isEditing">
+  <div class="col-xs-6">
+    <address ng-show="customerVm.customer.name">
+      <strong>{{customerVm.customer.name}}</strong><br>
+      {{customerVm.customer.address}}<br>
+      {{customerVm.customer.cap}}, {{customerVm.customer.city}} {{customerVm.customer.state}}<br>
+      <abbr title="Partita IVA">P. IVA</abbr> {{customerVm.customer.vat_id}}<br>
+      <abbr title="Codice fiscale">Cod. Fisc.</abbr> {{customerVm.customer.tax_code}}
+    </address>
+  </div>
+</div>
+
+<div class="row" ng-show="customerVm.isEditing">
+  <div class="col-xs-12">
+    <form class="form-horizontal" name="customerForm" ng-submit="customerVm.updateCustomer(customerForm.$valid)">
+      <div class="form-group" ng-class="{ 'has-error' : customerForm.name.$invalid && !customerForm.name.$pristine }">
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="name" id="azienda" ng-model="customerVm.customer.name" placeholder="Nome Azienda" required>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : customerForm.indirizzo.$invalid && !customerForm.indirizzo.$pristine }">
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="indirizzo" id="indirizzo" ng-model="customerVm.customer.address" placeholder="Via/Piazza" required>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : customerForm.cap.$invalid && !customerForm.cap.$pristine || customerForm.citta.$invalid && !customerForm.citta.$pristine || customerForm.provincia.$invalid && !customerForm.provincia.$pristine}">
+        <div class="col-sm-2">
+          <input type="text" pattern="[0-9]{5}" class="form-control" name="cap" id="cap" ng-model="customerVm.customer.cap" placeholder="CAP" required>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="citta" id="citta" ng-model="customerVm.customer.city" placeholder="Città" required>
+        </div>
+        <div class="col-sm-1">
+          <input type="text" class="form-control" name="provincia" id="provincia" ng-model="customerVm.customer.state" pattern="[A-Z]{2}" placeholder="Provincia" required>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : customerForm.piva.$invalid && !customerForm.piva.$pristine }">
+        <label for="provincia" class="col-sm-2 control-label">P.IVA</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" name="piva" id="piva" pattern="[0-9]{11}" ng-model="customerVm.customer.vat_id" placeholder="Partita IVA" required>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : customerForm.codfisc.$invalid && !customerForm.codfisc.$pristine }">
+        <label for="provincia" class="col-sm-2 control-label">C.FISC</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" name="codfisc" id="codfisc" ng-model="customerVm.customer.tax_code" placeholder="Codice Fiscale" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" ng-class="" class="btn btn-default" ng-disabled="customerForm.$invalid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

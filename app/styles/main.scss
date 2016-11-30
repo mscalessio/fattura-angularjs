@@ -1,0 +1,30 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+@import "variables";
+
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+@import "bootswatch";
+
+.container {
+  width: 800px;
+}
+
+@media print {
+  table.items {
+    min-height: 200px;
+  }
+  button {
+    display: none !important;
+  }
+  i.glyphicons {
+    display: none !important;
+  }
+  input,
+  textarea {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+}

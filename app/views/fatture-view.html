@@ -1,0 +1,157 @@
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <button class="btn btn-default" ng-click="">Edit</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <address ng-show="fattureView.invoice.company.name">
+      <strong>{{fattureView.invoice.company.name}}</strong><br>
+      {{fattureView.invoice.company.address}}<br>
+      {{fattureView.invoice.company.cap}}, {{fattureView.invoice.company.city}} {{fattureView.invoice.company.state}}<br>
+      <abbr title="Partita IVA">P. IVA</abbr> {{fattureView.invoice.company.vat_id}}<br>
+      <abbr title="Codice fiscale">Cod. Fisc.</abbr> {{fattureView.invoice.company.tax_code}}
+    </address>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <hr>
+  </div>
+  <div class="col-xs-6">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th width="30%">Tipo</th>
+          <th>Numero</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Fattura
+          </td>
+          <td>
+            {{fattureView.invoice.invoice_id}}
+          </td>
+          <td>
+            {{fattureView.invoice.date | date}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-6 text-right">
+    <p><strong>Cliente</strong></p>
+    <address ng-show="fattureView.invoice.customer.name">
+      <strong>{{fattureView.invoice.customer.name}}</strong><br>
+      {{fattureView.invoice.customer.address}}<br>
+      {{fattureView.invoice.customer.cap}}, {{fattureView.invoice.customer.city}} {{fattureView.invoice.customer.state}}<br>
+      <abbr title="Partita IVA">P. IVA</abbr> {{fattureView.invoice.customer.vat_id}}<br>
+      <abbr title="Codice fiscale">Cod. Fisc.</abbr> {{fattureView.invoice.customer.tax_code}}
+    </address>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <hr style="border-top: 4px solid #e6e6e6;">
+  </div>
+  <div class="col-xs-12">
+    <table class="table items">
+      <thead>
+        <tr>
+          <th width="60%">Descrizione</th>
+          <th width="10%">Qtà.</th>
+          <th width="15%" class="text-right">Importo</th>
+          <th width="15%" class="text-right">Totale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in fattureView.invoice.items track by item.id">
+          <td>
+            {{item.description}}
+          </td>
+          <td>
+            {{item.qty}}
+          </td>
+          <td class="text-right">
+            {{item.cost | currency}}
+          </td>
+          <td class="text-right">
+            {{item.cost * item.qty | currency}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <hr style="border-top: 4px solid #e6e6e6;">
+  </div>
+  <div class="col-xs-12">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td width="75%" class="text-right">
+            Imponibile prestazioni
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureView.invoice.imponibile | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            Rivalsa parziale INPS 4%
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureView.invoice.rivalsa | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            TOTALE IMPONIBILE
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureView.invoice.totale_imponibile | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            IVA 22%
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureView.invoice.iva | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            TOTALE FATTURA
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureView.invoice.totale_fattura | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            RITENUTA ACCONTO 20%
+          </td>
+          <td width="15%" class="text-right">
+            {{fattureView.invoice.ritenuta_acconto | currency}}
+          </td>
+        </tr>
+        <tr>
+          <td width="75%" class="text-right">
+            <strong>NETTO DA VERSARE</strong>
+          </td>
+          <td width="15%" class="text-right">
+            <strong>{{fattureView.invoice.netto_da_versare | currency}}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

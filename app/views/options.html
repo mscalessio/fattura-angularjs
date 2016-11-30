@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div uib-alert ng-repeat="alert in optionsVm.alerts" ng-class="'alert-' + (alert.type || 'success')" close="optionsVm.closeAlert($index)">{{alert.msg}}</div>
+    <form name="optionsForm" class="form-horizontal" ng-submit="optionsVm.updateOptions()" novalidate>
+      <div class="form-group">
+        <label for="tax" class="col-sm-2 control-label">IVA</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" min="0" max="1" step="0.01" name="tax" id="tax" ng-model="optionsVm.options.tax" placeholder="IVA" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inps" class="col-sm-2 control-label">Rivalsa INPS</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" min="0" max="1" step="0.01" name="inps" id="inps" ng-model="optionsVm.options.inps" placeholder="Rivalsa INPS" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ritenuta" class="col-sm-2 control-label">Ritenuta di acconto</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" min="0" max="1" step="0.01" name="ritenuta" id="ritenuta" ng-model="optionsVm.options.ritenuta" placeholder="Ritenuta di acconto" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="banca" class="col-sm-2 control-label">Nome Banca</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="banca" id="banca" ng-model="optionsVm.options.banca.nome" placeholder="Nome Banca" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="iban" class="col-sm-2 control-label">IBAN</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="iban" id="iban" ng-model="optionsVm.options.banca.iban" placeholder="IBAN" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default" ng-disabled="optionsForm.$invalid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
